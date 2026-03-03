@@ -86,5 +86,3 @@ jobs:
         with:
           push: true
           tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
-
-          
