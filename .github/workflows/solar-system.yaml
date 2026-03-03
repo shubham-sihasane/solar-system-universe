@@ -29,7 +29,8 @@ jobs:
        id: node-js-unit-test
        run: npm test
      - name: Archive Test Result
-       if: failure() && (steps.node-js-unit-test.outcome == 'failure' || steps.node-js-unit-test == 'success')
+      #  if: failure() && (steps.node-js-unit-test.outcome == 'failure' || steps.node-js-unit-test == 'success') Skip if previous step is failue
+       if: always()
        uses: actions/upload-artifact@v7.0.0
        with:
         name: Test-Artifact
