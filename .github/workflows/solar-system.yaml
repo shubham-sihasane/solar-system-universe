@@ -1,5 +1,4 @@
 name: Solar-System
-
 on:
   workflow_dispatch:
   push:
@@ -85,32 +84,5 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: false
-          tags: docker.io/${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          push: false
-          tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
-      # - name: Docker Image Test
-        run: |
-          docker images
-          docker run --name solay-system-app -d \
-          -p 3000:3000 \
-          -e MONGO_URI=$MONGO_URI \
-          -e MONGO_USERNAME=$MONGO_USERNAME \
-          -e MONGO_PASSWORD=$MONGO_PASSWORD \
-          ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
-
-          export IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' solar-app)
-          echo $IP
-
-          echo Testing Image URL with wget
-          wget -q -o - 127.0.0.1:3000/live | grep live
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
           push: true
           tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
-      
-        
