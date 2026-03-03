@@ -1,0 +1,21 @@
+name: Solar-System
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+jobs:
+  unit-testing:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v6.0.2
+     - name: Setup Node.js environment
+       uses: actions/setup-node@v6.2.0
+       with:
+        node-version: 18
+     - name: Install Dependencies
+       run: npm install
+     - name: Unit Testing
+       run: npm test
