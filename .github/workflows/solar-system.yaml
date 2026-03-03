@@ -13,10 +13,15 @@ jobs:
   unit-testing:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        node-version: [18, 19, 20]
+        os:
+          - ubuntu-latest
+          - macos-latest
+        node-version:
+          - 18
+          - 19
+          - 20
         exclude:
-          - os: [macos-latest]
+          - os: macos-latest
             node-version: 18
     runs-on: ${{ matrix.os}}
     steps:
